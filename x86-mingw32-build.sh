@@ -138,11 +138,11 @@ $script: stage $STAGE: build $COMPONENT ..."
     gcc)
       if ! test -r gcc-*/configure
       then
-	$RUN prepare gcc-core-$GCC_VERSION
+	$RUN prepare gcc-$GCC_VERSION
         for FILE in $GCC_LANGUAGE_OPTIONS
 	do
 	  case $GCC_LANGUAGE_SET in *$FILE*) ;; *) FILE=no ;; esac
-	  case $FILE in 'c++') FILE='g++' ;; f77) FILE=g77 ;; esac
+	  case $FILE in 'c++') FILE='c++' ;; f77) FILE=g77 ;; esac
 	  test $FILE = no || $RUN prepare gcc-$FILE-$GCC_VERSION
 	done
       fi
@@ -168,7 +168,7 @@ $script: stage $STAGE: build $COMPONENT ..."
 
     headers | mingw-runtime | w32api)
       MINGWRT=`tarname mingw-runtime \
-        $RUNTIME_VERSION src.tar.gz $PACKAGE_DIR | sed s',-[0-9].*,,'`
+        $RUNTIME_VERSION src.tar.xz $PACKAGE_DIR | sed s',-[0-9].*,,'`
       test -r $MINGWRT-*/configure || $RUN prepare $MINGWRT-$RUNTIME_VERSION
       test -r w32api-*/configure || $RUN prepare "w32api-$W32API_VERSION"
       case $COMPONENT in

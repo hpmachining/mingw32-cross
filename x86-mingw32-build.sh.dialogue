@@ -71,16 +71,16 @@ echo "
  be downloaded to a local package directory of your choice:--
 "
 case $BUILD_COMPONENTS in *gcc*) echo "\
-    gcc-core-$GCC_VERSION-${gcc_srctag-"src"}.tar.gz"
+    gcc-$GCC_VERSION-${gcc_srctag-"src"}.tar.xz"
 esac
 case $BUILD_COMPONENTS in *binutils*) echo "\
-    binutils-$BINUTILS_VERSION-${binutils_srctag-"src"}.tar.gz"
+    binutils-$BINUTILS_VERSION-${binutils_srctag-"src"}.tar.xz"
 esac
 case $BUILD_COMPONENTS in *headers* | *mingw-runtime*) echo "\
-    $mingwrt-$RUNTIME_VERSION-${mingwrt_srctag-"src"}.tar.gz"
+    $mingwrt-$RUNTIME_VERSION-${mingwrt_srctag-"src"}.tar.xz"
 esac
 case $BUILD_COMPONENTS in *headers* | *w32api*) echo "\
-    w32api-$W32API_VERSION-${w32api_srctag-"src"}.tar.gz"
+    w32api-$W32API_VERSION-${w32api_srctag-"src"}.tar.xz"
 esac
 ask "
  Each of these packages is obtainable from the MinGW project download page,
@@ -102,16 +102,16 @@ do ask "$INVALID_CHOICE `fixrange 1 2`" "1" REPLY \:; done
 if test $REPLY = 1
 then
   case $BUILD_COMPONENTS in *gcc*)
-    option DOWNLOAD gcc-core-$GCC_VERSION-${gcc_srctag-"src"}.tar.gz
+    option DOWNLOAD gcc-$GCC_VERSION-${gcc_srctag-"src"}.tar.xz
   esac
   case $BUILD_COMPONENTS in *binutils*)
-    option DOWNLOAD binutils-$BINUTILS_VERSION-${binutils_srctag-"src"}.tar.gz
+    option DOWNLOAD binutils-$BINUTILS_VERSION-${binutils_srctag-"src"}.tar.xz
   esac
   case $BUILD_COMPONENTS in *headers* | *mingw-runtime*)
-    option DOWNLOAD $mingwrt-$RUNTIME_VERSION-${mingwrt_srctag-"src"}.tar.gz
+    option DOWNLOAD $mingwrt-$RUNTIME_VERSION-${mingwrt_srctag-"src"}.tar.xz
   esac
   case $BUILD_COMPONENTS in *headers* | *w32api*)
-    option DOWNLOAD w32api-$W32API_VERSION-${w32api_srctag-"src"}.tar.gz
+    option DOWNLOAD w32api-$W32API_VERSION-${w32api_srctag-"src"}.tar.xz
   esac
 
 case $BUILD_COMPONENTS in *gcc*)
@@ -120,11 +120,11 @@ ask "
  compiler only.  You may also require one or more of the following additional
  packages, if you wish to add support for other optional languages:--
 
-    gcc-ada-$GCC_VERSION-${gcc_srctag-"src"}.tar.gz      (ada)
-    gcc-g++-$GCC_VERSION-${gcc_srctag-"src"}.tar.gz      (C++)
-    gcc-g77-$GCC_VERSION-${gcc_srctag-"src"}.tar.gz      (f77, i.e. FORTRAN-77)
-    gcc-java-$GCC_VERSION-${gcc_srctag-"src"}.tar.gz     (java)
-    gcc-objc-$GCC_VERSION-${gcc_srctag-"src"}.tar.gz     (objc, i.e. Objective-C)
+    gcc-ada-$GCC_VERSION-${gcc_srctag-"src"}.tar.xz      (ada)
+    gcc-c++-$GCC_VERSION-${gcc_srctag-"src"}.tar.xz      (C++)
+    gcc-g77-$GCC_VERSION-${gcc_srctag-"src"}.tar.xz      (f77, i.e. FORTRAN-77)
+    gcc-java-$GCC_VERSION-${gcc_srctag-"src"}.tar.xz     (java)
+    gcc-objc-$GCC_VERSION-${gcc_srctag-"src"}.tar.xz     (objc, i.e. Objective-C)
 
  Would you like me to download any of these optional language packages?
 " YES REPLY \?
@@ -136,8 +136,8 @@ for COMPONENT in $GCC_LANGUAGE_OPTIONS; do ask "\
   if isyes $REPLY
   then
     option GCC_LANGUAGE_SET $COMPONENT \,
-    case $COMPONENT in c++) COMPONENT=g++ ;; f77) COMPONENT=g77 ;; esac
-    option DOWNLOAD gcc-$COMPONENT-$GCC_VERSION-src.tar.gz
+    case $COMPONENT in c++) COMPONENT=c++ ;; f77) COMPONENT=g77 ;; esac
+    option DOWNLOAD gcc-$COMPONENT-$GCC_VERSION-src.tar.xz
   fi
 done; }
 esac
@@ -160,28 +160,28 @@ else echo "
 "
 ALLOW_DOWNLOADS=NO
 case $BUILD_COMPONENTS in *gcc*) echo "\
-    gcc-core-$GCC_VERSION-${gcc_srctag-"src"}.tar.gz"
+    gcc-$GCC_VERSION-${gcc_srctag-"src"}.tar.xz"
 esac
 case $BUILD_COMPONENTS in *binutils*) echo "\
-    binutils-$BINUTILS_VERSION-${binutils_srctag-"src"}.tar.gz"
+    binutils-$BINUTILS_VERSION-${binutils_srctag-"src"}.tar.xz"
 esac
 case $BUILD_COMPONENTS in *headers* | *mingw-runtime*) echo "\
-    $mingwrt-$RUNTIME_VERSION-${mingwrt_srctag-"src"}.tar.gz"
+    $mingwrt-$RUNTIME_VERSION-${mingwrt_srctag-"src"}.tar.xz"
 esac
 case $BUILD_COMPONENTS in *headers* | *w32api*) echo "\
-    w32api-$W32API_VERSION-${w32api_srctag-"src"}.tar.gz"
+    w32api-$W32API_VERSION-${w32api_srctag-"src"}.tar.xz"
 esac
 case $BUILD_COMPONENTS in *gcc*) echo "
  In addition to these, you may also require any of these optional extra
  packages, if you want your cross-compiler to support other languages,
- in addition to \`C'; (if you chose an alternative \`gcc-core' version,
+ in addition to \`C'; (if you chose an alternative \`gcc' version,
  then you must use the same version of these supplementary packages):--
 
-    gcc-ada-$GCC_VERSION-${gcc_srctag-"src"}.tar.gz      (ada)
-    gcc-g++-$GCC_VERSION-${gcc_srctag-"src"}.tar.gz      (C++)
-    gcc-g77-$GCC_VERSION-${gcc_srctag-"src"}.tar.gz      (f77, i.e. FORTRAN-77)
-    gcc-java-$GCC_VERSION-${gcc_srctag-"src"}.tar.gz     (java)
-    gcc-objc-$GCC_VERSION-${gcc_srctag-"src"}.tar.gz     (objc, i.e. Objective-C)\
+    gcc-ada-$GCC_VERSION-${gcc_srctag-"src"}.tar.xz      (ada)
+    gcc-c++-$GCC_VERSION-${gcc_srctag-"src"}.tar.xz      (C++)
+    gcc-g77-$GCC_VERSION-${gcc_srctag-"src"}.tar.xz      (f77, i.e. FORTRAN-77)
+    gcc-java-$GCC_VERSION-${gcc_srctag-"src"}.tar.xz     (java)
+    gcc-objc-$GCC_VERSION-${gcc_srctag-"src"}.tar.xz     (objc, i.e. Objective-C)\
 "
 esac
 ask "
@@ -210,10 +210,10 @@ isyes $REPLY && echo
 GCC_LANGUAGE_SET=c CHOOSE=YES
 for COMPONENT in $GCC_LANGUAGE_OPTIONS
 do
-  case $COMPONENT in 'c++') FILE='g++' ;; 'f77') FILE='g77' ;;
+  case $COMPONENT in 'c++') FILE='c++' ;; 'f77') FILE='g77' ;;
     *) FILE=$COMPONENT ;;
   esac
-  if test -r $PACKAGE_DIR/gcc-$FILE-$GCC_VERSION-${gcc_srctag-"src"}.tar.gz
+  if test -r $PACKAGE_DIR/gcc-$FILE-$GCC_VERSION-${gcc_srctag-"src"}.tar.xz
   then
     if isyes $REPLY
     then
@@ -341,11 +341,11 @@ do
     "$script: configuration error; unknown component `quote $COMPONENT`" ;;
   esac
   VERSION_TAG=`echo $COMPONENT | sed 's?^.*-??' | tr a-z A-Z`_VERSION
-  test x$COMPONENT = xgcc && BASE_PACKAGE=gcc-core || BASE_PACKAGE=$COMPONENT
-  choose $COMPONENT $VERSION_TAG $BASE_PACKAGE $PACKAGE_DIR src.tar.gz
-  eval 'option DOWNLOAD `tarname $BASE_PACKAGE $'$VERSION_TAG' src.tar.gz $PACKAGE_DIR`'
+  test x$COMPONENT = xgcc && BASE_PACKAGE=gcc || BASE_PACKAGE=$COMPONENT
+  choose $COMPONENT $VERSION_TAG $BASE_PACKAGE $PACKAGE_DIR src.tar.xz
+  eval 'option DOWNLOAD `tarname $BASE_PACKAGE $'$VERSION_TAG' src.tar.xz $PACKAGE_DIR`'
   test x$COMPONENT = xgcc && for FILE in $EXTRA_DOWNLOADS
-    do option DOWNLOAD gcc-$FILE-$GCC_VERSION-src.tar.gz
+    do option DOWNLOAD gcc-$FILE-$GCC_VERSION-src.tar.xz
     done
 done
 fi

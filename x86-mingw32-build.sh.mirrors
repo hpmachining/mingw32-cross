@@ -60,7 +60,7 @@ test "$BUILD_METHOD" = interactive && askindex "
 if test $REPLY -gt 0
 then
   REPLY=`set $AVAILABLE_MIRRORS; shift $REPLY; echo $1`
-  DOWNLOAD_HOST="http://$REPLY.dl.sourceforge.net/mingw"
+  DOWNLOAD_HOST="https://$REPLY.dl.sourceforge.net/mingw"
 else
   if test "$ALLOW_DOWNLOADS" = YES && test "$BUILD_METHOD" = unattended
   then

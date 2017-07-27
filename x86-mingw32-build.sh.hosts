@@ -42,6 +42,7 @@
   umn            US     Minneapolis, Minnesota      North America
   superb-east    US     McLean, Virginia            North America
   superb-west    US     Seattle, Washington         North America
+  cytranet       US     Seattle, Washington         North America
 
 # The following appeared in Earnie's original `portmaker' configuration;
 # today, they don't seem to work for me (KDM, 24-Oct-2006).
